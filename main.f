@@ -263,6 +263,8 @@ bmp-APP-CLASS                   { Call class for displaying bmp's in a child win
   ;
 
 { --------------------DISPLAY COMMANDS ------------------ }
+{ What each of these does can be seen in 'readme.txt' }
+
 : showlife_rnd
   cr ." Starting random life display "
   wrapping @ if ." with wrapping edges " else ." without wrapping edges " then
