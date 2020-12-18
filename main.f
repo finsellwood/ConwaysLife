@@ -1,32 +1,9 @@
-
-{ ---------------------------------------------------------------------------------------- }
-{                                                                                          }
-{ Words to create bitmap image files ( .bmp) in memory and display them as part of         } 
-{ a real time data visualisation routine - fixed and stretchable window version V6.        }
-{                                                                                          }
-{ This version prints the .bmp into windows separate from the console, requiring some      }
-{ additional operating system specific (Windows, Mac OSX etc) code to build and "talk"     }
-{ to the new window.                                                                       }
-{                                                                                          }
-{ Note that bmp x size must be integer divisible by 4 to avoid display glitches without    }
-{ padding line ends - this is a general feature of the bmp file format and is not codes    }
-{ specific.  bmp x sizes will be rounded down to the nearest factor of as a result 4.      }
-{                                                                                          }
-{ Two methods are provided to write the .bmp to the screen, the first uses the Windows     }
-{ call SetDIBitsToDevice and writes and image with single 1x1 pixels for each cell, the    }
-{ second uses the call StretchDIBits which allows stretching of a .bmp image to fill the   }
-{ available window - useful for "magnifying" and image so that individual pixels are       }
-{ easier to view.  Functions of this kind are typically hardware accelerated by graphics   }
-{ cards and so relatively "fast".                                                          }
-{                                                                                          }
-{          Roland Smith, V6 revised 26/11/2020 For 3rd Year Lab D3 Experiment              }
-{                                                                                          }
-{ ---------------------------------------------------------------------------------------- }
+{ A modified version of the Graphics_V6_Single_Scaled_BMP_Window.f file written by Roland Smith. }
 
 INCLUDE "Rnd.f" 
 INCLUDE "liferules.f"
 INCLUDE "inputcode.f"
-
+{ Includes the other relevant files - these must be in the same location }
 { -------------------------------- bmp Display Routine Setup ----------------------------- }
 {                                                                                          }
 {                                Global constants and variables                            }
