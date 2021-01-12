@@ -3,7 +3,9 @@ Compared to the main branch, which constitiutes a plain implementation, this rea
 
 
 RUNNING THE CODE
-" {a b c} gather_data " runs simulations on the current grid dimensions for s values spanning from 'a' to 'b', each for 'c' generations. s is the synchronicity as a percentage, and by default spans 0 to 100. E.g. "50 100 3000 gather_data" will run simulations for 3000 generations each from an S value of 50% to an S of 100%, and the data for all the simulations is saved to the same text file.
+" {a b c} gather_data " runs simulations on the current grid dimensions for s values spanning from 'a' to 'b', each for 'c' generations. 
+s is the synchronicity as a percentage, and by default spans 0 to 100. E.g. "50 100 3000 gather_data" will run simulations for 3000 generations 
+each from an S value of 50% to an S of 100%, and the data for all the simulations is saved to the same text file.
 
 
 Various parameters can also be adjusted;
