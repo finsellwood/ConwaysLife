@@ -1,15 +1,37 @@
-{ A modified version of the Graphics_V6_Single_Scaled_BMP_Window.f file written by Roland Smith. }
+{ Main version, backed up 4/1/21 }
+{ ---------------------------------------------------------------------------------------- }
+{                                                                                          }
+{ Words to create bitmap image files ( .bmp) in memory and display them as part of         } 
+{ a real time data visualisation routine - fixed and stretchable window version V6.        }
+{                                                                                          }
+{ This version prints the .bmp into windows separate from the console, requiring some      }
+{ additional operating system specific (Windows, Mac OSX etc) code to build and "talk"     }
+{ to the new window.                                                                       }
+{                                                                                          }
+{ Note that bmp x size must be integer divisible by 4 to avoid display glitches without    }
+{ padding line ends - this is a general feature of the bmp file format and is not codes    }
+{ specific.  bmp x sizes will be rounded down to the nearest factor of as a result 4.      }
+{                                                                                          }
+{ Two methods are provided to write the .bmp to the screen, the first uses the Windows     }
+{ call SetDIBitsToDevice and writes and image with single 1x1 pixels for each cell, the    }
+{ second uses the call StretchDIBits which allows stretching of a .bmp image to fill the   }
+{ available window - useful for "magnifying" and image so that individual pixels are       }
+{ easier to view.  Functions of this kind are typically hardware accelerated by graphics   }
+{ cards and so relatively "fast".                                                          }
+{                                                                                          }
+{          Roland Smith, V6 revised 26/11/2020 For 3rd Year Lab D3 Experiment              }
+{                                                                                          }
+{ ---------------------------------------------------------------------------------------- }
 
 INCLUDE "Rnd.f" 
 INCLUDE "liferules.f"
 INCLUDE "inputcode.f"
-{ Includes the other relevant files - these must be in the same location }
 { -------------------------------- bmp Display Routine Setup ----------------------------- }
 {                                                                                          }
 {                                Global constants and variables                            }
 
 
-10 Constant Update-Timer  { Sets windows update rate - lower = faster refresh            }
+1 Constant Update-Timer  { Sets windows update rate - lower = faster refresh            }
 
 variable bmp-x-size     { x dimension of bmp file # 1                                    }
 
@@ -113,7 +135,7 @@ bmp-size   @ 3 * 54 +       bmp-length !
 
 : Life-bmp-Blue
   dup dup 2 + @ + swap 54 + dup rot rot do 
-  dup i swap - 3 / living_array_loc @ + c@ 255 * 
+  dup i swap - 3 / living_array_loc @ + c@ 255 lives @ / * 
   dup dup
   i  tuck c!
   1+ tuck c!
@@ -263,8 +285,6 @@ bmp-APP-CLASS                   { Call class for displaying bmp's in a child win
   ;
 
 { --------------------DISPLAY COMMANDS ------------------ }
-{ What each of these does can be seen in 'readme.txt' }
-
 : showlife_rnd
   cr ." Starting random life display "
   wrapping @ if ." with wrapping edges " else ." without wrapping edges " then
@@ -278,7 +298,7 @@ bmp-APP-CLASS                   { Call class for displaying bmp's in a child win
   begin                               { Begin update / display loop                     }
   bmp-address @ Life-bmp-Blue         { Add random pixels to .bmp in memory             }
   bmp-address @ bmp-to-screen-stretch { Stretch .bmp to display window                  }
-  100 ms                              { Delay for viewing ease, reduce for higher speed }
+  { 100 ms }                             { Delay for viewing ease, reduce for higher speed }
   step
   key?                                { Break test loop on key press                    }
   until 
