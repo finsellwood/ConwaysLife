@@ -1,6 +1,7 @@
 Conway's Life Code by Finlay Osman Sellwood
 This code consists of four files; 'main.f', 'inputcode.f', 'liferules.f' and 'rnd.f'. 
 Along with this, an 'inputfile.txt' file is included to demonstrate reading from a file.
+Note that this code is for a normal (synchronous) Life implementation, and the modified, asynchronous, code is found on the 'Asynchronous-Life' branch.
 
 RUNNING THE CODE
 To run the code, only main.f needs to be opened in SwiftForth (SF), the others are called internally. 
